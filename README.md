@@ -8,6 +8,7 @@
 
 - upload
 - phar
+- Wirteup: https://github.com/team-su/SUCTF-2019/tree/master/Web/Upload%20Labs%202/writeup
 
 ## 启动
 
