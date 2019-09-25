@@ -1,7 +1,7 @@
 version: '2'
 services:
   phar:
-    image: phar
+    image: ctftraining/suctf_2019_upload_labs_2
     restart: always
     build:
       context: .
