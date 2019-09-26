@@ -8,5 +8,5 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "127.0.0.1:9025:80"
-    environments:
+    environment:
       - FLAG=flag{test_flag}
