@@ -1,5 +1,7 @@
 FROM phusion/baseimage:latest
 
+ENV FLAG flag{test_flag}
+
 RUN apt-get update && apt-get install -y python-software-properties && add-apt-repository ppa:ondrej/php && apt-get update
 
 RUN apt-get install -y php5.6 php5.6-mbstring php5.6-curl php5.6-cli php5.6-mysql php5.6-soap libapache2-mod-php5.6 mariadb-server apache2 gcc netcat-traditional && \
@@ -10,8 +12,10 @@ RUN mkdir -p /etc/service/apache2/ && \
     printf "#!/bin/sh\n\nexec /usr/sbin/apachectl -D FOREGROUND\n" > /etc/service/apache2/run && \
     mkdir -p /etc/service/mysql/ && \
     printf "#!/bin/sh\n\nexec /usr/bin/mysqld_safe\n" > /etc/service/mysql/run && \
+    mkdir -p /etc/service/flag/ && \
+    printf "#!/bin/sh\n\necho $FLAG > /flag && export FLAG=not_flag && FLAG=not_flag\n" > /etc/service/flag/run && \
     mkdir -p /var/run/mysqld/ && chown mysql:mysql /var/run/mysqld && \
-    chmod 700 /etc/service/mysql/run /etc/service/apache2/run
+    chmod 700 /etc/service/mysql/run /etc/service/apache2/run /etc/service/flag/run
 
 COPY src/html /var/www/html
 COPY src/flag /flag
